@@ -94,7 +94,7 @@ def process_urls(urls):
     yield "Adding to FAISS vector database..."
     st.session_state.vector_store.add_documents(filtered_docs)
 
-    yield "✅ Processing complete"
+    yield "Processing complete"
     st.session_state.processed = True
 
 def generate_answer(query):
