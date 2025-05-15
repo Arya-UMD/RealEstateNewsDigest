@@ -14,7 +14,7 @@ import faiss
 os.environ["COHERE_API_KEY"] = ""  
 CHUNK_SIZE = 800
 CHUNK_OVERLAP = 200
-EMBEDDING_MODEL = "sentence-transformers/all-mpnet-base-v2"
+EMBEDDING_MODEL = "sentence-transformers/all-MiniLM-L6-v2"
 
 
 if 'processed' not in st.session_state:
