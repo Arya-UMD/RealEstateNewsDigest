@@ -10,14 +10,13 @@ from langchain.embeddings import HuggingFaceEmbeddings
 from langchain.docstore import InMemoryDocstore
 import faiss
 
-# Configuration
-os.environ["COHERE_API_KEY"] = "WbjPWdMtqw1zVohxXBHnT8kUrJpDlFfmkXRtOxVm"  # Replace with your Cohere API key
-CHUNK_SIZE = 800
-CHUNK_OVERLAP = 100
-EMBEDDING_MODEL = "sentence-transformers/all-mpnet-base-v2"
-DEFAULT_SOURCE = "https://www.cnbc.com/2025/04/30/homebuyer-mortgage-demand-drops-further-as-economic-uncertainty-roils-the-housing-market.html"
 
-# Initialize session state
+os.environ["COHERE_API_KEY"] = ""  
+CHUNK_SIZE = 800
+CHUNK_OVERLAP = 200
+EMBEDDING_MODEL = "sentence-transformers/all-mpnet-base-v2"
+
+
 if 'processed' not in st.session_state:
     st.session_state.processed = False
 if 'vector_store' not in st.session_state:
@@ -156,7 +155,7 @@ with st.sidebar:
         for i, url in enumerate([
             "https://www.cnbc.com/video/2025/04/23/market-stability-depends-on-how-much-underlying-damage-tariff-rhetoric-did-citis-beata-manthey.html",
             "https://www.cnbc.com/2025/04/30/homebuyer-mortgage-demand-drops-further-as-economic-uncertainty-roils-the-housing-market.html",
-            ""
+            "https://www.bloomberg.com/industries/real-estate"
         ])
     ]
     
@@ -179,7 +178,6 @@ with st.sidebar:
         st.session_state.processed = False
         st.rerun()
 
-# Main interaction
 query = st.text_input("Ask your real estate question", 
                      placeholder="e.g. What are the current housing market trends?")
 
@@ -205,7 +203,6 @@ if query:
             except Exception as e:
                 st.error(f"Error: {str(e)}")
 
-# Info box
 st.sidebar.markdown("---")
 st.sidebar.info(
     "Enter at least one valid URL, click 'Process URLs', "
